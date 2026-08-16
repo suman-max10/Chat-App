@@ -1,9 +1,14 @@
 /** @format */
 
 export const signup = (req, res) => {
-  res.send("Signup page");
+  const {fullName,email,password}=req.body;
+  
+  try{
+
+  }catch(error){
 
   
+}
 };
 
 export const login = (req, res) => {
