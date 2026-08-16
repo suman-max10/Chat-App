@@ -25,8 +25,7 @@ export const signup = async (req, res) => {
         password:hashedPassword
       })
       if(newUser){
-        await newUser.save();
-        return res.status(201).json({message:"User created successfully"});
+        
       }else{
          res.status(400).json({message:"Invalid user data"});
       }
