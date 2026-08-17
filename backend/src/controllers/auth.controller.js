@@ -30,6 +30,7 @@ export const signup = async (req, res) => {
         
       }else{
          res.status(400).json({message:"Invalid user data"});
+
       }
   }catch(error){
 
