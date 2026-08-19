@@ -8,12 +8,14 @@ export const signup = async (req, res) => {
   
   try{
     // hash the password
+
     if(password.length<6){
       return res.status(400).json({message:"Password must be at least 6 characters long"});
     }
     const user = await User.findOne({email});
       if(user){
         return res.status(400).json({message:"User Email already exists"});
+
 
       }
       const salt = await bcrypt.genSalt(10);  
@@ -28,6 +30,7 @@ export const signup = async (req, res) => {
         
       }else{
          res.status(400).json({message:"Invalid user data"});
+
       }
   }catch(error){
 
