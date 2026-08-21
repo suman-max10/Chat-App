@@ -2,19 +2,21 @@ import User from "../model/user.model.js";
 
 export const getUsersForSidebar = async (req, res) => {
   try {
-    const loggedInUserId = req.user?._id;
+    const loggedInUserId = req.user._id;
+    const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
+    res.status(200).json(filteredUsers);
 
-    if (!loggedInUserId) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
+    // if (!loggedInUserId) {   
+    //   return res.status(401).json({ message: "Unauthorized" });
+    // }
 
-    const users = await User.find({ _id: { $ne: loggedInUserId } })
-      .select("-password")
-      .sort({ updatedAt: -1 });
+    // const users = await User.find({ _id: { $ne: loggedInUserId } })
+    //   .select("-password")
+    //   .sort({ updatedAt: -1 });
 
-    res.status(200).json(users);
+    // res.status(200).json(users);
   } catch (error) {
     console.log("error in getUsersForSidebar controller", error.message);
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ error: "Server error" });
   }
 };
