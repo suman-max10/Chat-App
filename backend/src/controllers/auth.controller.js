@@ -1,13 +1,13 @@
 import { generateToken } from "../lib/utils.js";
 import User from "../model/user.model.js";
 import bcrypt from "bcryptjs";
-
+import cloudinary from "../lib/cloudinary.js";
 
 export const signup = async (req, res) => {
   const {fullName,email,password}=req.body;
   
   try{
-    // hash the password
+    // i have used bcrypt for hashing the password before saving it to the database. This is a good practice for security reasons.
     if(!fullName || !email || !password){ 
       return res.status(400).json({message:"Please fill all the fields"});
     }
@@ -97,9 +97,22 @@ export const updateProfile = async (req, res) => {
     const {profilePic}=req.body;
      const userId = req.user._id;
 
-     
+     if(!profilePic){
+      return res.status(400).json({message:"Please provide a profile picture"});
+     }
 
+
+     const cloudinaryResult = await cloudinary.uploader.upload(profilePic)
+     const updatedUser = await User.findByIdAndUpdate(
+       userId,
+       {profilePic: cloudinaryResult.secure_url},
+       {new:true, runValidators:true}
+     ).select("-password");
+
+     res.status(200).json(updatedUser); 
   }catch(error){
+    console.log("error in updateProfile controller",error.message);
+    res.status(500).json({message:"Server error"});
 
   }
 }
