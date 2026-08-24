@@ -1,9 +1,7 @@
-import React from 'react'
+/** @format */
 
 const LoginPage = () => {
-  return (
-    <div>LoginPage</div>
-  )
-}
+  return <div>LoginPage</div>;
+};
 
-export default LoginPage
+export default LoginPage;
