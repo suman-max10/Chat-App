@@ -1,7 +1,7 @@
 /** @format */
 
-const NavBar = () => {
-  return <div>NavBar</div>;
+const Navbar = () => {
+  return <div>Navbar</div>;
 };
 
-export default NavBar;
+export default Navbar;
