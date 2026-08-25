@@ -8,8 +8,17 @@ import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import SettingsPage from "./pages/SettingsPage";
 import SignUpPage from "./pages/SignUpPage";
+import { use, useEffect } from "react";
+import { useAuthStore } from "./stores/useAuthStore";
 
 const App = () => {
+  const {authUser,checkAuth} = useAuthStore()
+
+  useEffect(()=>{
+    checkAuth()
+  },[checkAuth]);
+
+  console.log({authUser});
   return (
     <div>
       <Navbar />

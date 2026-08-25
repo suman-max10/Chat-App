@@ -1,6 +1,10 @@
 /** @format */
 
+import { useAuthStore } from "../stores/useAuthStore.js";
+
 const Navbar = () => {
+  const { authUser } = useAuthStore();
+
   return <div>Navbar</div>;
 };
 
