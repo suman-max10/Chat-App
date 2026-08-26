@@ -23,6 +23,10 @@ const SignUpPage = () => {
     {/* {left side } */}
     <div className="flex flex-col justify-center items-center p-6 sm:12">
       <div className="w-full max-w-md space-y-8">
+        {/* {logo} */}
+        <div className="text-center mb-8">
+          
+        </div>
 
       </div>
     </div>
