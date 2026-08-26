@@ -11,6 +11,15 @@ const SignUpPage = () => {
 
    const {signup,isSigningUp} = useAuthStore();
 
+   const validateForm = () =>{
+
+   }
+
+   const handelSubmit = (e) =>{
+    e.preventDefault()
+    
+   }
+
   return <div>SignUpPage</div>;
 };
 
