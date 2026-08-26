@@ -20,7 +20,7 @@ const SignUpPage = () => {
     
    }
 
-  return <div>SignUpPage</div>;
+  return <div className="min-h-screen grid lg:grid-cols-2"></div>;
 };
 
 export default SignUpPage;
