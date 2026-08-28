@@ -3,6 +3,8 @@
 import { create } from "zustand";
 import { axiosInstanace } from "../lib/axios";
 import toast from "react-hot-toast";
+import { Truck } from "lucide-react";
+import axios from "axios";
 
 export const useAuthStore = create((set) => ({
   authUser: null,
@@ -35,6 +37,22 @@ export const useAuthStore = create((set) => ({
     } finally {
       set({ isSigningUp: false });
     }
+  },
+
+  login: async (data) => {
+    set({isLoggingIng: true});
+    try {
+      const res = await axiosInstanace.post("/auth/login",data);
+      set({authUser:res.data});
+      toast.success("Logged in Successfully");
+
+    } catch (error) {
+      toast.error(error.response.data.message);
+
+    }finally{
+      set({isLoggingIng:false});
+    }
+
   },
 
   logout: async () => {
