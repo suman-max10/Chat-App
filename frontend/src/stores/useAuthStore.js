@@ -3,8 +3,6 @@
 import { create } from "zustand";
 import { axiosInstanace } from "../lib/axios";
 import toast from "react-hot-toast";
-import { logout } from "../../../backend/src/controllers/auth.controller";
-import axios from "axios";
 
 export const useAuthStore = create((set) => ({
   authUser: null,
@@ -39,14 +37,13 @@ export const useAuthStore = create((set) => ({
     }
   },
 
-  logout: async () =>{
+  logout: async () => {
     try {
       await axiosInstanace.post("/auth/logout");
-      set({authUser: null});
-      toast.success("Logged out succesfully")
+      set({ authUser: null });
+      toast.success("Logged out succesfully");
     } catch (error) {
-      toast.error(error.response.data.message)
+      toast.error(error.response.data.message);
     }
-  }
-
+  },
 }));
