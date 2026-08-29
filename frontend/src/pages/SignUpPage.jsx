@@ -161,6 +161,7 @@ const SignUpPage = () => {
       {/* right side */}
       <div className='hidden lg:flex items-center justify-center bg-base-200 p-12'>
         <div className='max-w-md text-center'>
+          
           <MessageSquare className='mx-auto size-16 text-primary' />
 
           <h2 className='mt-6 text-3xl font-bold'>Join our community</h2>
