@@ -3,8 +3,6 @@
 import { create } from "zustand";
 import { axiosInstanace } from "../lib/axios";
 import toast from "react-hot-toast";
-import { Truck } from "lucide-react";
-import axios from "axios";
 
 export const useAuthStore = create((set) => ({
   authUser: null,
@@ -26,6 +24,7 @@ export const useAuthStore = create((set) => ({
       set({ isCheckingAuth: false });
     }
   },
+
   signup: async (data) => {
     set({ isSigningUp: true });
     try {
@@ -40,20 +39,16 @@ export const useAuthStore = create((set) => ({
   },
 
   login: async (data) => {
-    set({isLoggingIng: true});
+    set({ isLoggingIng: true });
     try {
-      const res = await axiosInstanace.post("/auth/login",data);
-      set({authUser:res.data});
+      const res = await axiosInstanace.post("/auth/login", data);
+      set({ authUser: res.data });
       toast.success("Logged in Successfully");
-
     } catch (error) {
-      toast.error(error.response.data.message);
-
-    }finally{
-      set({isLoggingIng:false});
+      toast.error(error.response?.data?.message || "Unable to log in");
+    } finally {
+      set({ isLoggingIng: false });
     }
-    
-
   },
 
   logout: async () => {
@@ -62,7 +57,29 @@ export const useAuthStore = create((set) => ({
       set({ authUser: null });
       toast.success("Logged out succesfully");
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Unable to log out");
+    }
+  },
+
+  updateProfile: async (profilePic) => {
+    if (!profilePic) return;
+
+    set({ isUpdatingProfile: true });
+    try {
+      const res = await axiosInstanace.put("/auth/updateProfile", {
+        profilePic,
+      });
+      set((state) => ({
+        authUser:
+          state.authUser ?
+            { ...state.authUser, profilePic: res.data.profilePic }
+          : null,
+      }));
+      toast.success("Profile picture updated successfully");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Unable to update profile");
+    } finally {
+      set({ isUpdatingProfile: false });
     }
   },
 }));
