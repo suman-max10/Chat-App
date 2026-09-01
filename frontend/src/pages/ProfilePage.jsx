@@ -21,6 +21,8 @@ const ProfilePage = () => {
     reader.readAsDataURL(file);
   };
 
+
+
   if (!authUser) return null;
 
   return (
