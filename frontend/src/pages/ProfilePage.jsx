@@ -16,12 +16,10 @@ const ProfilePage = () => {
     reader.onload = async () => {
       const base64Image = reader.result;
       setSelectedImg(base64Image);
-      await updateProfile({profilePic:base64Image});
+      await updateProfile({ profilePic: base64Image });
     };
     reader.readAsDataURL(file);
   };
-
-
 
   if (!authUser) return null;
 
@@ -36,10 +34,7 @@ const ProfilePage = () => {
 
           {/* avatar Upload Section */}
 
-
           <div className='flex flex-col items-center gap-4'>
-
-
             <div className='relative'>
               <img
                 src={selectedImg || authUser.profilePic || "/avatar.png"}
@@ -56,7 +51,6 @@ const ProfilePage = () => {
                   ${isUpdatingProfile ? "animate-pulse pointer-events-none" : ""}
                 `}>
                 <Camera className='w-5 h-5 text-base-200' />
-
 
                 <input
                   type='file'
