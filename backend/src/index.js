@@ -1,4 +1,4 @@
-/** @format */
+
 
 import express from "express";
 import dotenv from "dotenv";
@@ -23,7 +23,7 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
-app.options(/^(.*)$/, cors());
+// app.options(/^(.*)$/, cors());
 
 app.use("/api/auth", authRoute);
 app.use("/api/message", messageRoutes);
